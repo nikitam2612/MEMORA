@@ -1,0 +1,6 @@
+# Keep sensitive credentials out of Git
+config.js
+
+# OS metadata files
+.DS_Store
+Thumbs.db

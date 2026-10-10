@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEMORA — Your memories, turned into a website.</title>
+<meta name="description" content="MEMORA — personalized websites for celebrations, memories, invitations and businesses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<!-- =====================================================================
+ MEMORA BACKEND CONFIG  (Phase 2A — Firebase init + Email/Password auth)
+ =====================================================================
+ Shared Firebase project: memoraweb-94009
+ This file uses Firebase Authentication (Email + Password) and Cloud
+ Firestore as the real, shared, cross-device backend. Paste the real
+ Web App config from Firebase Console → Project settings → Your apps
+ into the object below. Until apiKey/projectId are filled in, the app
+ falls back to LOCAL-ONLY mode (localStorage) exactly as before.
+
+ EmailJS below is UNRELATED to sign-in — it is only used, optionally,
+ for sending transactional emails (order receipts/status updates) to
+ customers. It is a client-side, best-effort prototype notification
+ channel, not a secure backend and not part of authentication.
+====================================================================== -->
+<script src="config.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav"><div class="nav-inner">
+  <button class="logo" onclick="go('')">MEMORA<small>YOUR STORY · YOUR WEBSITE</small></button>
+  <div class="navlinks" id="navlinks">
+    <a href="javascript:void(0)" onclick="go('');return false" data-r="">Home</a>
+    <a href="javascript:void(0)" onclick="go('b2c');return false" data-r="b2c">B2C Experiences</a>
+    <a href="javascript:void(0)" onclick="go('b2b');return false" data-r="b2b">B2B Businesses</a>
+    <a href="javascript:void(0)" onclick="go('creations');return false" data-r="creations">Creations</a>
+    <a href="javascript:void(0)" onclick="go('how-it-works');return false" data-r="how-it-works">How It Works</a>
+    <a href="javascript:void(0)" onclick="go('pricing');return false" data-r="pricing">Pricing</a>
+    <a href="javascript:void(0)" onclick="go('contact');return false" data-r="contact">Contact</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <div id="customerNavArea"></div>
+    <button class="menutoggle" onclick="toggleMobile()" id="menuBtn">☰</button>
+  </div>
+</div></nav>
+
+<div class="mobile-panel" id="mobilePanel">
+  <a href="javascript:void(0)" onclick="toggleMobile();go('');return false">Home</a>
+  <a href="javascript:void(0)" onclick="toggleMobile();go('b2c');return false">B2C Experiences</a>
+  <a href="javascript:void(0)" onclick="toggleMobile();go('b2b');return false">B2B Businesses</a>
+  <a href="javascript:void(0)" onclick="toggleMobile();go('creations');return false">Creations</a>
+  <a href="javascript:void(0)" onclick="toggleMobile();go('how-it-works');return false">How It Works</a>
+  <a href="javascript:void(0)" onclick="toggleMobile();go('pricing');return false">Pricing</a>
+  <a href="javascript:void(0)" id="mobileMyOrderLink" onclick="toggleMobile();go('my-booking');return false" style="display:none">My Order</a>
+  <a href="javascript:void(0)" onclick="toggleMobile();go('contact');return false">Contact</a>
+</div>
+
+<main id="app"></main>
+
+<footer>
+  <strong>MEMORA</strong><br>
+  <small>Your memories, turned into a website.</small>
+  <small style="display:block;margin-top:10px"><a href="javascript:void(0)" onclick="go('terms');return false" style="color:#8c93ab">Terms &amp; Conditions</a> &nbsp;·&nbsp; <a href="javascript:void(0)" onclick="go('privacy');return false" style="color:#8c93ab">Privacy Policy</a> &nbsp;·&nbsp; <a href="javascript:void(0)" onclick="go('my-booking');return false" style="color:#8c93ab">My Order</a></small>
+</footer>
+
+<div class="toast" id="toast"></div>
+<div id="recaptchaContainer"></div>
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()"><div class="modal-box" id="modalBox"></div></div>
+
+<script src="script.js"></script>
+</body>
+</html>
