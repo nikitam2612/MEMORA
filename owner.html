@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MEMORA — Owner Dashboard</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+  <script src="config.js"></script>
+</head>
+
+<body>
+
+  <div id="ownerApp">
+
+    <!-- LOGIN -->
+    <section id="ownerLogin" class="owner-screen">
+
+      <div class="owner-card">
+
+        <div class="owner-logo">MEMORA</div>
+
+        <h1>Owner Access</h1>
+
+        <p>
+          Sign in to manage customer orders.
+        </p>
+
+        <form id="ownerLoginForm">
+
+          <label>
+            Email
+            <input
+              type="email"
+              id="ownerEmail"
+              autocomplete="username"
+              required
+            >
+          </label>
+
+          <label>
+            Password
+            <input
+              type="password"
+              id="ownerPassword"
+              autocomplete="current-password"
+              required
+            >
+          </label>
+
+          <button type="submit" class="navbtn">
+            Sign In
+          </button>
+
+          <div id="ownerLoginMessage"></div>
+
+        </form>
+
+      </div>
+
+    </section>
+
+
+    <!-- DASHBOARD -->
+    <section id="ownerDashboard" class="owner-dashboard" style="display:none">
+
+      <header class="owner-header">
+
+        <div>
+          <div class="owner-logo">MEMORA</div>
+          <h1>Owner Dashboard</h1>
+        </div>
+
+        <div>
+          <span id="ownerEmailDisplay"></span>
+
+          <button
+            type="button"
+            class="navbtn"
+            id="ownerLogoutBtn"
+          >
+            Sign Out
+          </button>
+        </div>
+
+      </header>
+
+
+      <!-- STATS -->
+
+      <div class="owner-stats">
+
+        <div class="owner-stat">
+          <span>Total Orders</span>
+          <strong id="statTotal">0</strong>
+        </div>
+
+        <div class="owner-stat">
+          <span>Pending Review</span>
+          <strong id="statPending">0</strong>
+        </div>
+
+        <div class="owner-stat">
+          <span>Active</span>
+          <strong id="statActive">0</strong>
+        </div>
+
+        <div class="owner-stat">
+          <span>Completed</span>
+          <strong id="statCompleted">0</strong>
+        </div>
+
+      </div>
+
+
+      <!-- ORDERS -->
+
+      <div class="owner-orders-section">
+
+        <div class="owner-section-heading">
+
+          <div>
+            <h2>Customer Orders</h2>
+            <p>
+              New orders appear automatically.
+            </p>
+          </div>
+
+          <span id="liveStatus">
+            ● Connecting...
+          </span>
+
+        </div>
+
+        <div id="ownerOrders">
+          <div class="owner-empty">
+            Loading orders...
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    </div>
+
+
+  <!-- OWNER ORDER DETAILS MODAL -->
+  <div
+    id="ownerOrderModal"
+    class="owner-modal-overlay"
+    style="display:none;"
+  >
+  </div>
+
+
+  <script src="owner.js"></script>
+</body>
+</html>
